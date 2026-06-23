@@ -1,8 +1,6 @@
 import "dotenv/config";
-import postgres from 'postgres';
 import { prisma } from "../utils/db.utils";
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 export interface ITablesCount {
   customersCount: number;
