@@ -34,16 +34,11 @@ model users {
   password String
 }
 
-enum InvoiceStatus {
-  PENDING
-  PAID
-}
-
 model im_Customer {
-  id        String    @id @default(uuid())
-  name      String
-  email     String    @unique
-  invoices  im_Invoice[]
+  id       String       @id @default(uuid())
+  name     String
+  email    String       @unique
+  invoices im_Invoice[]
 }
 
 model im_Invoice {
@@ -52,23 +47,28 @@ model im_Invoice {
   discount    Int
   tax         Int
   date        DateTime      @default(now())
-  payment     im_Payment?
   status      InvoiceStatus
-  customer    im_Customer      @relation(fields: [customer_id], references: [id])
+  customer    im_Customer   @relation(fields: [customer_id], references: [id])
   items       im_Item[]
+  payment     im_Payment?
 }
 
 model im_Payment {
-  id          String        @id @default(uuid())
-  invoice_id  String        @unique
-  date        DateTime      @default(now())
-  invoice     im_Invoice    @relation(fields: [invoice_id], references: [id])
+  id         String     @id @default(uuid())
+  invoice_id String     @unique
+  date       DateTime   @default(now())
+  invoice    im_Invoice @relation(fields: [invoice_id], references: [id])
 }
 
 model im_Item {
-  id          String        @id @default(uuid())
-  name        String
-  price       Int
-  invoice_id  String
-  invoice     im_Invoice    @relation(fields: [invoice_id], references: [id])
+  id         String     @id @default(uuid())
+  name       String
+  price      Int
+  invoice_id String
+  invoice    im_Invoice @relation(fields: [invoice_id], references: [id])
+}
+
+enum InvoiceStatus {
+  PENDING
+  PAID
 }
