@@ -430,4 +430,4 @@ FodyWeavers.xsd
 
 # added after
 dist
-/generated/prisma
+/api/generated/prisma
