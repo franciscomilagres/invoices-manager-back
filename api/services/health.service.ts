@@ -13,7 +13,6 @@ export interface ITablesCount {
 export class HealthService {
   async countTables(): Promise<ITablesCount> {
     try {
-      
       const customersCountPromise = prisma.im_Customer.count();
       const invoicesCountPromise = prisma.im_Invoice.count();
       const paymentsCountPromise = prisma.im_Payment.count();
